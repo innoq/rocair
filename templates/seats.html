@@ -22,26 +22,41 @@
 	arrow keys.
 </p>
 
-<form action="{{ checkInURI }}" method="post" class="cabin">
-	<ul class="rows">
-		{% for row in seats %}
-		<li>
-			<ul class="seats">
-				{% for seat in row %}
-				<li {{ optAttr("class", seat.class()) }} {{
-						optAttr("title", seat.desc) }}>
-					<label>
-						<input type="radio" name="seat" value="{{ seat.id }}" {{
-								optAttr("disabled", seat.unavailable()) }} {{
-								optAttr("checked", seat.selected) }}>
-						{{ seat.label() }}
-					</label>
-				</li>
-				{% endfor %}
-			</ul>
-		</li>
-		{% endfor %}
-	</ul>
+<form action="{{ checkInURI }}" method="post" class="cabin-old">
+	<div class="plane">
+		<div class="plane-head">
+			<div class="plane-windows">
+				<div class="plane-window is-left"></div>
+				<div class="plane-window is-right"></div>
+			</div>
+		</div>
+		<div class="plane-body">
+			<div class="plane-wings"></div>
+			<div class="plane-cabin">
+				<ul class="rows">
+					{% for row in seats %}
+					<li>
+						<ul class="seats">
+							{% for seat in row %}
+							<li {{ optAttr("class", seat.class()) }} {{
+									optAttr("title", seat.desc) }}>
+								<label>
+									<input type="radio" name="seat" value="{{ seat.id }}" {{
+											optAttr("disabled", seat.unavailable()) }} {{
+											optAttr("checked", seat.selected) }}>
+									{{ seat.label() }}
+								</label>
+							</li>
+							{% endfor %}
+						</ul>
+					</li>
+					{% endfor %}
+				</ul>
+			</div>
+		</div>
+		<div class="plane-tail"></div>
+
+	</div>
 	<input type="submit" value="confirm selection">
 </form>
 {% endblock %}

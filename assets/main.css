@@ -1,3 +1,5 @@
+* { box-sizing: border-box; }
+
 body {
 	width: 90%;
 	margin: 0 auto;
@@ -45,7 +47,53 @@ input[type=checkbox][disabled],
 	display: none;
 }
 
-/* basic */
+/* airplane */
+
+.plane {
+	width: 23em;
+	margin: 5em auto;
+}
+
+.plane-head {
+	border: 2px solid #2BACB5;
+	border-bottom: 0px solid white;
+	height: 20em; width: 100%;
+border-radius: 90%/180% 180% 0 0;
+}
+
+.plane-windows {
+	width: 12em;
+	height: 5em;
+	margin: 7em auto;
+}
+
+.plane-window {
+	border: 2px solid #2BACB5;
+	width: 5em;
+	height: 3em;
+	display: inline-block;
+	margin-left: 0.5em;
+	/* background-color: #2BACB5; */
+}
+
+.plane-window.is-left {
+	-webkit-transform: skewY(-30deg);
+	   -moz-transform: skewY(-30deg);
+			transform: skewY(-30deg);
+}
+
+.plane-window.is-right {
+	-webkit-transform: skewY(30deg);
+	   -moz-transform: skewY(30deg);
+			transform: skewY(30deg);
+}
+
+.plane-body {
+	/* height: 90em; */
+	border-right: 2px solid #2BACB5;
+	border-left: 2px solid #2BACB5;
+	overflow: hidden;
+}
 
 .cabin {
 	float: left; /* shrink-wrap */
@@ -63,7 +111,7 @@ input[type=checkbox][disabled],
 }
 
 .rows {
-	overflow: auto; /* contain floats */
+	/* overflow: auto; */ /* contain floats */
 	padding: 0 1em;
 }
 
@@ -73,15 +121,16 @@ input[type=checkbox][disabled],
 
 .seats > li {
 	float: left;
-	width: 4em;
-	height: 4em;
-	margin: 0 0.2em;
-	line-height: 4em;
+	width: 3em;
+	height: 3em;
+	margin: 0;
+	pading: 0;
+	line-height: 3em;
 	text-align: center;
 }
 
 .seats > li:nth-child(6n+4) { /* aisle */
-	margin-left: 4em;
+	margin-left: 2.5em;
 }
 
 .seats label { /* fill container */
