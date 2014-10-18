@@ -6,8 +6,10 @@
 %}{% endmacro %}
 
 {% block body %}
-<p>
-	Thank you for flying <i class="organization">ROCAir</i>. Web check-in for
+<h1>{{ title }}</h1>
+
+<p class="lead-text">
+	Thank you for flying ROCA Airways. Web check-in for
 	flight <i>{{ flightID }}</i> is now available - please select your seat
 	below.
 </p>
@@ -57,6 +59,6 @@
 		<div class="plane-tail"></div>
 
 	</div>
-	<input type="submit" value="confirm selection">
+	<input class="button" type="submit" value="Confirm selection">
 </form>
 {% endblock %}

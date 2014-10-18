@@ -8,17 +8,26 @@ var path = require("path");
 var generateSeats = require("./seats");
 var util = require("./util");
 
+var title = "ROCA Airways Web Check-In";
+
 var app = express();
 var app = module.exports = express();
-app.set("title", "ROCAir Seat Selector");
+app.set("title", title);
 nunjucks.configure("templates", { autoescape: true, express: app });
 
 app.use("/assets", express.static(path.join(__dirname, "..", "assets")));
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.get("/", function(req, res) {
-	var flightNumber = util.randomInt(100, 9999);
-	res.redirect("/check-in/rc-" + flightNumber);
+	// TODO: Make dev-links panel work
+	var flightID = "RC-" + util.randomInt(100, 9999);
+	var params = {
+		title: title,
+		includeCSS: '1',
+		flight: flightID,
+		checkInURI: "/check-in/" + flightID
+	};
+	res.render("start.html", params);
 });
 
 app.all("/check-in/:flight", function(req, res) {
@@ -56,16 +65,16 @@ app.all("/check-in/:flight", function(req, res) {
 
 function devLinks(uri) {
 	var links = [{
-		label: "✓ CSS — ✓ JavaScript",
-		desc: "enable CSS and JavaScript",
+		label: "✓ CSS - ✓ JS",
+		desc: "Enable CSS and JavaScript",
 		queryString: null
 	}, {
-		label: "✓ CSS — ✘ JavaScript",
-		desc: "disable JavaScript",
+		label: "✓ CSS - ✘ JS",
+		desc: "Disable JavaScript",
 		queryString: "js=0"
 	}, {
-		label: "✘ CSS — ✘ JavaScript",
-		desc: "disable CSS and JavaScript",
+		label: "✘ CSS - ✘ JS",
+		desc: "Disable CSS and JavaScript",
 		queryString: "css=0&js=0"
 	}];
 	links.forEach(function(link) {

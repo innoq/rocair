@@ -4,13 +4,18 @@
 <head>
 	<meta charset="utf-8">
 	<title>{{ title }}</title>
+	<link rel="stylesheet" href="/assets/normalize.css">
 	{% if includeCSS %}
-	<link rel="stylesheet" href="/assets/main.css">
+		<link rel="stylesheet" href="/assets/main.css">
+		<link href='http://fonts.googleapis.com/css?family=Lato:700italic|Open+Sans:400,300,600' rel='stylesheet' type='text/css'>
 	{% endif %}
 </head>
 
 <body>
-	<h1>{{ title }}</h1>
+	<header class="company-header">
+		<a href="/"><img src="/assets/rocair-logo.svg" width="250px" alt="ROCA Airways Logo"></a>
+	</header>
+
 	{% block body %}{% endblock %}
 
 	{% if devLinks %}
@@ -23,17 +28,17 @@
 
 	<footer>
 		<p>
-			<i class="organization">ROCAir</i> is a simple demo application
+			<span class="organization">ROCA</span> <i>Airways</i> online check-in is a simple demo application
 			demonstrating the
 			<a href="https://github.com/innoq/rocair#readme">benefits</a> of
 			<a href="https://www.gov.uk/service-manual/making-software/progressive-enhancement">
 				progressive enhancement
 			</a>
-			for both end users and developers
+			for both end users and developers.
 		</p>
 		<p>
-			created by <a href="https://www.innoq.com">innoQ</a>, though based
-			on the collective wisdom of web advocates across the globe
+			Created by <a href="https://www.innoq.com">innoQ</a>, though based
+			on the collective wisdom of web advocates across the globe.
 		</p>
 	</footer>
 

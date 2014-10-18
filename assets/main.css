@@ -1,23 +1,92 @@
+/* ========================================================================== */
+/* ROCA Airways Base Styles
+/* ========================================================================== */
+
 * { box-sizing: border-box; }
+
+/* Basic typography
+========================================================================== */
 
 body {
 	width: 90%;
-	margin: 0 auto;
-	font-family: Helvetica, Arial, sans-serif;
+	margin: 2em auto;
+	font-family: 'Open Sans', sans-serif;
+	font-weight: 300;
+	color: #333;
 }
 
-footer {
-	clear: both;
-	display: block;
-	margin: 2em 0 1em;
-	border-top: 1px solid #CCC;
-	padding-top: 1em;
-	font-size: 90%;
+h1, h2, h3, h4, h5 {
+	font-family: 'Lato', sans-serif;
+	font-weight: 700;
+	color: #555;
+	margin: 0.25em 0;
+}
+
+a {
+	color: #EB6060;
+}
+
+a:active,
+a:focus {
+	color: #BE5C5C;
 }
 
 p {
 	margin: 0 0 0.5em;
 }
+
+p.lead-text {
+	font-size: 1.25em;
+}
+
+label, strong { font-weight: 400; }
+
+.annotation {
+	color: #ddd;
+	font-style:	italic;
+	font-weight: 400;
+}
+
+.organization {
+	color: #EB6060;
+	font-family: 'Lato', sans-serif;
+	font-weight: 700;
+}
+
+.hint {
+	font-size: 90%;
+	color: #777;
+}
+
+.unavailable {
+	opacity: 0.5; /* TODO: not safe */
+}
+
+.vis-alt { /* TODO: not accessible */
+	display: none;
+}
+
+
+/* Company footer & header
+========================================================================== */
+
+footer {
+	clear: both;
+	display: block;
+	margin: 2em 0 5em;
+	border-top: 2px solid #eee;
+	padding-top: 1em;
+	font-size: 80%;
+	color: #777;
+}
+
+.company-header {
+	margin-bottom: 1em;
+}
+
+
+/* Forms
+========================================================================== */
 
 input[type=submit] {
 	width: 100%;
@@ -30,24 +99,54 @@ input[type=checkbox][disabled],
 	cursor: not-allowed;
 }
 
-.organization {
-	text-shadow: 1px 1px 2px #CCC; /* XXX: tacky!? */
+/* Buttons
+========================================================================== */
+
+.button {
+	padding: 0.5em 1em;
+	color: #EB6060;
+	background-color: white;
+	border: 2px solid #EB6060;
+	font-weight: 400;
 }
 
-.hint {
-	font-size: 90%;
-	color: #777;
+.button:focus, .button:hover {
+	color: white;
+	background-color: #EB6060;
 }
 
-.unavailable {
-	opacity: 0.5;
+.button:active {
+	background-color: #D26868;
 }
 
-.vis-alt { /* XXX: awkward name */
-	display: none;
+
+/* Checkin Form
+========================================================================== */
+
+.checkin-form .form-row { margin: 1em 0; }
+
+.form-row label { margin-bottom: 0.25em; }
+
+.form-row label, .form-row input {
+	width: 100%;
+	display: block;
 }
 
-/* airplane */
+.form-row input[type=text] {
+	padding: 0.5em 1em;
+	border: 2px solid #ddd;
+}
+
+.form-row input[type=text]:focus {
+	border: 2px solid #aaa;
+	outline: none;
+}
+
+
+.form-row input[disabled] { background-color: #f7f7f7; }
+
+/* Airplane
+========================================================================== */
 
 .plane {
 	width: 23em;
@@ -55,7 +154,7 @@ input[type=checkbox][disabled],
 }
 
 .plane-head {
-	border: 2px solid #2BACB5;
+	border: 2px solid #EB6060;
 	border-bottom: 0px solid white;
 	height: 20em; width: 100%;
 border-radius: 90%/180% 180% 0 0;
@@ -68,12 +167,12 @@ border-radius: 90%/180% 180% 0 0;
 }
 
 .plane-window {
-	border: 2px solid #2BACB5;
+	border: 2px solid #EB6060;
 	width: 5em;
 	height: 3em;
 	display: inline-block;
 	margin-left: 0.5em;
-	/* background-color: #2BACB5; */
+	/* background-color: #EB6060; */
 }
 
 .plane-window.is-left {
@@ -90,8 +189,8 @@ border-radius: 90%/180% 180% 0 0;
 
 .plane-body {
 	/* height: 90em; */
-	border-right: 2px solid #2BACB5;
-	border-left: 2px solid #2BACB5;
+	border-right: 2px solid #EB6060;
+	border-left: 2px solid #EB6060;
 	overflow: hidden;
 }
 
@@ -179,21 +278,32 @@ border-radius: 90%/180% 180% 0 0;
 	margin-left: -999em;
 }
 
-/* dev controls */
+/* Debug panel
+========================================================================== */
 
 .debug {
 	position: fixed;
-	top: 0;
-	right: 0;
-	margin: 0 0 1em 1em;
-	border: 2px solid #BCE8F1;
-	border-width: 0 0 2px 2px;
-	padding: 0.5em;
-	text-align: right;
-	background-color: #D9EDF7;
+	bottom: 0em;
+	right: 0em;
+	left: 0em;
+	margin: 0.5em;
+	border: 1px solid #EB6060;
+	padding: 0.5em 1em;
+	text-align: center;
+	background-color: #FFE8E8;
+	background-color: rgba(255,232,232,0.9);
 }
 
 .debug a {
-	display: block;
-	color: black;
+	font-size: 80%;
+	text-decoration: none;
+	font-weight: 400;
+}
+
+.debug a:after {
+	content: " | "
+}
+
+.debug a:last-child:after {
+	content: "";
 }
