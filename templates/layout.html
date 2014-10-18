@@ -11,12 +11,14 @@
 	{% endif %}
 </head>
 
-<body>
+<body class="container">
 	<header class="company-header">
 		<a href="/"><img src="/assets/rocair-logo.svg" width="250px" alt="ROCA Airways Logo"></a>
 	</header>
 
-	{% block body %}{% endblock %}
+	<main role="main">
+		{% block body %}{% endblock %}
+	</main>
 
 	{% if devLinks %}
 	<div class="debug">

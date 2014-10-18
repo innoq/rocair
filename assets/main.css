@@ -8,8 +8,7 @@
 ========================================================================== */
 
 body {
-	width: 90%;
-	margin: 2em auto;
+	margin: 2em;
 	font-family: 'Open Sans', sans-serif;
 	font-weight: 300;
 	color: #333;
@@ -129,6 +128,7 @@ input[type=checkbox][disabled],
 
 .form-row label, .form-row input {
 	width: 100%;
+	max-width: 40em;
 	display: block;
 }
 
@@ -306,4 +306,14 @@ border-radius: 90%/180% 180% 0 0;
 
 .debug a:last-child:after {
 	content: "";
+}
+
+/* Mobile first media queries
+========================================================================== */
+
+@media screen and (min-width: 40em) {
+	.container {
+		width: 40em;
+		margin: 1em auto;
+	}
 }
