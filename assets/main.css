@@ -123,8 +123,8 @@ input[type=checkbox][disabled],
 /* Checkin Form
 ========================================================================== */
 
-.checkin-form .form-row { margin: 1em 0; }
-
+.checkin-form { overflow: hidden; }
+.form-row { margin: 1em 0; }
 .form-row label { margin-bottom: 0.25em; }
 
 .form-row label, .form-row input {
@@ -142,7 +142,7 @@ input[type=checkbox][disabled],
 	outline: none;
 }
 
-
+.form-row .button { margin-top: 0.5em; }
 .form-row input[disabled] { background-color: #f7f7f7; }
 
 /* Airplane
