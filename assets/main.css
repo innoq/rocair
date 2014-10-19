@@ -41,9 +41,9 @@ p.lead-text {
 label, strong { font-weight: 400; }
 
 .annotation {
-	color: #ddd;
+	color: #AAA;
 	font-style:	italic;
-	font-weight: 400;
+	font-weight: 300;
 }
 
 .organization {
@@ -72,7 +72,7 @@ label, strong { font-weight: 400; }
 footer {
 	clear: both;
 	display: block;
-	margin: 2em 0 5em;
+	margin: 2em 0 6em;
 	border-top: 2px solid #eee;
 	padding-top: 1em;
 	font-size: 80%;
@@ -87,10 +87,6 @@ footer {
 /* Forms
 ========================================================================== */
 
-input[type=submit] {
-	width: 100%;
-}
-
 input[type=radio][disabled],
 input[type=checkbox][disabled],
 .unavailable,
@@ -98,15 +94,39 @@ input[type=checkbox][disabled],
 	cursor: not-allowed;
 }
 
+
+/* Sections
+========================================================================== */
+
+.details {
+	margin-top: 2em;
+}
+
+.full-width {
+	width: 100%;
+	overflow: hidden;
+}
+
+/* Definition List
+========================================================================== */
+
+dd { margin: 0 0 0.5em 0; }
+dt {
+	font-weight: 600;
+	margin-bottom: 0em;
+}
+
+
 /* Buttons
 ========================================================================== */
 
 .button {
 	padding: 0.5em 1em;
+	font-weight: 400;
+	transition: all 0.25s ease-in-out;
 	color: #EB6060;
 	background-color: white;
 	border: 2px solid #EB6060;
-	font-weight: 400;
 }
 
 .button:focus, .button:hover {
@@ -117,6 +137,22 @@ input[type=checkbox][disabled],
 .button:active {
 	background-color: #D26868;
 }
+
+.button.secondary:focus, .button.secondary:hover {
+	color: white;
+	background-color: #DDD;
+}
+
+.button.secondary:active {
+	background-color: #DDD;
+}
+
+.button.secondary {
+	color: #AAA;
+	background-color: white;
+	border: 2px solid #DDD;
+}
+
 
 
 /* Checkin Form
@@ -145,61 +181,37 @@ input[type=checkbox][disabled],
 .form-row .button { margin-top: 0.5em; }
 .form-row input[disabled] { background-color: #f7f7f7; }
 
+
 /* Airplane
 ========================================================================== */
 
 .plane {
-	width: 23em;
-	margin: 5em auto;
-}
-
-.plane-head {
-	border: 2px solid #EB6060;
-	border-bottom: 0px solid white;
-	height: 20em; width: 100%;
-border-radius: 90%/180% 180% 0 0;
-}
-
-.plane-windows {
-	width: 12em;
-	height: 5em;
-	margin: 7em auto;
-}
-
-.plane-window {
-	border: 2px solid #EB6060;
-	width: 5em;
-	height: 3em;
-	display: inline-block;
-	margin-left: 0.5em;
-	/* background-color: #EB6060; */
-}
-
-.plane-window.is-left {
-	-webkit-transform: skewY(-30deg);
-	   -moz-transform: skewY(-30deg);
-			transform: skewY(-30deg);
-}
-
-.plane-window.is-right {
-	-webkit-transform: skewY(30deg);
-	   -moz-transform: skewY(30deg);
-			transform: skewY(30deg);
+	clear: both;
+	width: 400px;
+	margin: 2em 0;
 }
 
 .plane-body {
-	/* height: 90em; */
 	border-right: 2px solid #EB6060;
 	border-left: 2px solid #EB6060;
 	overflow: hidden;
 }
 
-.cabin {
-	float: left; /* shrink-wrap */
-	border-radius: 14em; /* corresponds to seats per row + aisle */
-	margin: 1em 0;
-	padding: 14em 0; /* compensate for border radius */
-	background-color: #FAFAFA;
+.plane:before {
+	content: "";
+	position: relative;
+	display: block;
+	height: 350px;
+	width: 400px;
+	background-image: url(plane-head.svg);
+}
+
+.plane:after {
+	content: "";
+	display: block;
+	height: 400px;
+	width: 400px;
+	background-image: url(plane-tail.svg);
 }
 
 .rows,
@@ -210,9 +222,13 @@ border-radius: 90%/180% 180% 0 0;
 }
 
 .rows {
-	/* overflow: auto; */ /* contain floats */
-	padding: 0 1em;
+	padding: 0 20px;
 }
+
+.rows > li:first-child {
+	margin-top: 25px;
+}
+
 
 .seats {
 	overflow: visible; /* avoids clipping and scrolling on focus-scaled seat */
@@ -220,16 +236,17 @@ border-radius: 90%/180% 180% 0 0;
 
 .seats > li {
 	float: left;
-	width: 3em;
-	height: 3em;
+	width: 50px;
+	height: 50px;
 	margin: 0;
 	pading: 0;
-	line-height: 3em;
+	line-height: 50px;
 	text-align: center;
+	transition: all 0.25s ease-in-out;
 }
 
 .seats > li:nth-child(6n+4) { /* aisle */
-	margin-left: 2.5em;
+	margin-left: 50px;
 }
 
 .seats label { /* fill container */
@@ -244,15 +261,9 @@ border-radius: 90%/180% 180% 0 0;
 	opacity: 1; /* neutralizes basic version -- XXX: hacky */
 }
 
-.rows.augmented .seats > li.focused {
-	transform: scale(1.2);
-	-webkit-transform: scale(1.2);
-}
-
 .rows.augmented .seats > li {
 	margin-bottom: 1em; /* legroom */
 	background-image: url(seat_unoccupied.svg);
-	background-size: cover;
 }
 
 .rows.augmented .seats > li:not(.unavailable) {
@@ -268,10 +279,8 @@ border-radius: 90%/180% 180% 0 0;
 }
 
 .rows.augmented .seats > li.vip { /* XXX: crude */
-	margin-bottom: 2em; /* extra legroom */
-	background-color: #FEE903;
+	margin-bottom: 40px; /* extra legroom */
 	background-image: url(seat_vip.svg);
-	opacity: 0.5;
 }
 
 .rows.augmented label {
@@ -286,26 +295,28 @@ border-radius: 90%/180% 180% 0 0;
 	bottom: 0em;
 	right: 0em;
 	left: 0em;
-	margin: 0.5em;
-	border: 1px solid #EB6060;
-	padding: 0.5em 1em;
+	border-top: 2px solid #DDD;
+	padding: 0.75em 1em 1em 1em;
 	text-align: center;
-	background-color: #FFE8E8;
-	background-color: rgba(255,232,232,0.9);
+	background-color: white;
+	overflow: hidden;
 }
 
 .debug a {
 	font-size: 80%;
 	text-decoration: none;
-	font-weight: 400;
 }
 
-.debug a:after {
-	content: " | "
+.debug a, .debug .annotation {
+	margin-bottom: 1em;
 }
 
-.debug a:last-child:after {
-	content: "";
+.debug .annotation {
+	display: block;
+}
+
+.debug a:last-child {
+	margin-right: 0em;
 }
 
 /* Mobile first media queries
@@ -316,4 +327,16 @@ border-radius: 90%/180% 180% 0 0;
 		width: 40em;
 		margin: 1em auto;
 	}
+
+	.half-width {
+		float: left;
+		width: 50%;
+	}
+
+	.debug a, .debug .annotation {
+		display: inline;
+		line-height: 1em;
+		margin-right: 0.5em;
+	}
+
 }

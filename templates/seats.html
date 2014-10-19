@@ -6,12 +6,11 @@
 %}{% endmacro %}
 
 {% block body %}
-<h1>{{ title }}</h1>
+<h1>Online check-in</h1>
 
 <p class="lead-text">
 	Thank you for flying ROCA Airways. Web check-in for
-	flight <i>{{ flightID }}</i> is now available - please select your seat
-	below.
+	flight <i>{{ flightID }}</i> is now available.
 </p>
 
 <p class="vis-alt">
@@ -24,16 +23,47 @@
 	arrow keys.
 </p>
 
+<section class="details half-width">
+	<h2>Passenger Details</h2>
+
+	<dl id="passenger-details">
+		<dt>Name</dt>
+		<dd>{{ name }}</dd>
+		<dt>Class</dt>
+		<dd>Economy</dd>
+		<dt>Seat</dt>
+		<dd>{{ seat.selected }}</dd>
+		<dt>Frequent Flyer Number</dt>
+		<dd></dd>
+	</dl>
+</section>
+
+<section class="details half-width">
+	<h2>Flight Details</h2>
+
+	<dl id="flight-details">
+		<dt>Flight</dt>
+		<dd>{{ flightID }}</dd>
+		<dt>From</dt>
+		<dd>Cologne Bonn</dd>
+		<dt>To</dt>
+		<dd>Berlin Tegel</dd>
+		<dt>Departure</dt>
+		<dd>Sun, 19.10.2014, 12:30h</dd>
+		<dt>Arrival</dt>
+		<dd>Sun, 19.10.2014, 13:30h</dd>
+	</dl>
+</section>
+
+<section class="details full-width">
+<h2>Seat Selection</h2>
+<p class="lead-text">
+	We preselected seat {{ seat }} for you. Feel free to select another seat below.
+</p>
+
 <form action="{{ checkInURI }}" method="post" class="cabin-old">
 	<div class="plane">
-		<div class="plane-head">
-			<div class="plane-windows">
-				<div class="plane-window is-left"></div>
-				<div class="plane-window is-right"></div>
-			</div>
-		</div>
 		<div class="plane-body">
-			<div class="plane-wings"></div>
 			<div class="plane-cabin">
 				<ul class="rows">
 					{% for row in seats %}
@@ -56,9 +86,11 @@
 				</ul>
 			</div>
 		</div>
-		<div class="plane-tail"></div>
-
 	</div>
-	<input class="button" type="submit" value="Confirm selection">
+
+
+
+	<input class="button full-width" type="submit" value="Confirm check-in">
 </form>
+</section>
 {% endblock %}

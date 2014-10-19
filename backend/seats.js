@@ -35,10 +35,10 @@ function generateSeat(index, vipCount, occupancy) {
 	var vip = index < vipCount;
 	var occupied, desc;
 	if(vip) {
-		desc = "reserved for VIPs";
+		desc = "Business Class";
 	} else {
 		occupied = Math.random() < occupancy;
-		desc = occupied ? "occupied" : null;
+		desc = occupied ? "Occupied" : null;
 	}
 	return new Seat(index, desc, vip, occupied);
 }

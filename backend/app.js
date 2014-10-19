@@ -65,15 +65,15 @@ app.all("/check-in/:flight", function(req, res) {
 
 function devLinks(uri) {
 	var links = [{
-		label: "✓ CSS - ✓ JS",
+		label: "All on",
 		desc: "Enable CSS and JavaScript",
 		queryString: null
 	}, {
-		label: "✓ CSS - ✘ JS",
+		label: "Styles only",
 		desc: "Disable JavaScript",
 		queryString: "js=0"
 	}, {
-		label: "✘ CSS - ✘ JS",
+		label: "HTML only",
 		desc: "Disable CSS and JavaScript",
 		queryString: "css=0&js=0"
 	}];

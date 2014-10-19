@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="400px" height="350px" viewBox="0 0 400 350" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.1 (8751) - http://www.bohemiancoding.com/sketch -->
+    <title>Roca Airways 2</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <path d="M1,353 C1,277.818578 72.5392405,3 200,3 C327.460759,3 399,290.518142 399,353" id="Line" stroke="#EB6060" stroke-width="2" stroke-linecap="square" sketch:type="MSShapeGroup"></path>
+        <path d="M135.255044,140.065152 L112.534845,175.065152 L194.479707,170.235024 L212.534845,140.065152 L135.255044,140.065152 Z" id="Rectangle-1" stroke="#EB6060" stroke-width="2" stroke-linecap="square" fill="#EB6060" sketch:type="MSShapeGroup" transform="translate(162.534845, 157.565152) rotate(-30.000000) translate(-162.534845, -157.565152) "></path>
+        <path d="M69.3252983,195.668645 L87.1750336,214.934848 L112.589268,214.934847 L149.674702,195.668645 L69.3252983,195.668645 Z" id="Rectangle-3" stroke="#EB6060" stroke-width="2" stroke-linecap="square" fill="#EB6060" sketch:type="MSShapeGroup" transform="translate(109.500000, 205.301746) rotate(-59.000000) translate(-109.500000, -205.301746) "></path>
+        <path d="M212.255044,140.065152 L189.534845,175.065152 L271.479707,170.235024 L289.534845,140.065152 L212.255044,140.065152 Z" id="Rectangle-2" stroke="#EB6060" stroke-width="2" stroke-linecap="square" fill="#EB6060" sketch:type="MSShapeGroup" transform="translate(239.534845, 157.565152) scale(-1, 1) rotate(-30.000000) translate(-239.534845, -157.565152) "></path>
+        <path d="M252.325298,195.668645 L270.175034,214.934848 L295.589268,214.934847 L332.674702,195.668645 L252.325298,195.668645 Z" id="Rectangle-4" stroke="#EB6060" stroke-width="2" stroke-linecap="square" fill="#EB6060" sketch:type="MSShapeGroup" transform="translate(292.500000, 205.301746) scale(-1, 1) rotate(-59.000000) translate(-292.500000, -205.301746) "></path>
+    </g>
+</svg>
