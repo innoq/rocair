@@ -53,15 +53,31 @@ app.all("/check-in/:flight", function(req, res) {
 		includeJS: req.query.js !== "0",
 		devLinks: devLinks(req.path)
 	};
+
 	if(req.method === "GET") {
+		var seatGenerator = generateSeats(24, 6, 0.3);
+
 		params.checkInURI = ""; // i.e. self
-		params.seats = generateSeats(24, 6, 0.3);
+		params.seats = seatGenerator.seats;
+		params.selectedSeat = seatGenerator.selectedSeat;
+		params.departure = oneWeekFromNow(1);
+		params.arrival = oneWeekFromNow(2);
+		params.passengerName = req.query.passengerName; // should be in the body
+
 		res.render("seats.html", params);
 	} else {
 		params.selectedSeat = req.body.seat;
 		res.render("confirmation.html", params);
 	}
 });
+
+function oneWeekFromNow(hours) {
+	var date = new Date();
+	date.setDate(date.getDate()+7);
+	date.setHours(date.getHours()+hours);
+	return date.getDate() + '.' + date.getMonth() + '.' + date.getFullYear()
+		+ ', ' + date.getHours() + ':' + date.getMinutes() + 'h';
+};
 
 function devLinks(uri) {
 	var links = [{

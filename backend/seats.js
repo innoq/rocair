@@ -28,7 +28,7 @@ module.exports = function(rowCount, colCount, occupancy) {
 		}
 	}
 
-	return rows;
+	return { selectedSeat: selection, seats: rows };
 };
 
 function generateSeat(index, vipCount, occupancy) {

@@ -186,18 +186,25 @@ dt {
 ========================================================================== */
 
 .plane {
-	clear: both;
-	width: 400px;
-	margin: 2em 0;
+	background-image: url(plane-wings.svg);
+	background-position: 50% 50%;
+	background-repeat: no-repeat;
 }
 
 .plane-body {
+	clear: both;
+	width: 400px;
+	margin: 2em auto;
+	background-color: white;
+}
+
+.plane-cabin {
 	border-right: 2px solid #EB6060;
 	border-left: 2px solid #EB6060;
 	overflow: hidden;
 }
 
-.plane:before {
+.plane-body:before {
 	content: "";
 	position: relative;
 	display: block;
@@ -206,7 +213,7 @@ dt {
 	background-image: url(plane-head.svg);
 }
 
-.plane:after {
+.plane-body:after {
 	content: "";
 	display: block;
 	height: 400px;

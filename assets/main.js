@@ -19,5 +19,6 @@ if(!svg || !svgFilters) {
 
 // augmentation controls
 $(".rows").fancyControls();
+$("[data-emitter]").dataMirror();
 
 }(jQuery));
