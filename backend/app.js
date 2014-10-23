@@ -49,10 +49,7 @@ app.all("/check-in/:flight", function(req, res) {
 
 	var params = {
 		title: app.get("title"),
-		flightID: flightID,
-		includeCSS: req.query.css !== "0",
-		includeJS: req.query.js !== "0",
-		devLinks: devLinks(req.url)
+		flightID: flightID
 	};
 
 	if(req.method === "GET") {
@@ -64,9 +61,14 @@ app.all("/check-in/:flight", function(req, res) {
 		params.departure = oneWeekFromNow(1);
 		params.arrival = oneWeekFromNow(2);
 		params.passengerName = req.query.passengerName;
+		params.includeCSS = req.query.css !== "0";
+		params.includeJS = req.query.js !== "0";
+		params.devLinks = devLinks(req.url);
 
 		res.render("seats.html", params);
 	} else {
+		params.includeCSS = true;
+		params.includeJS = true;
 		params.selectedSeat = req.body.seat;
 		res.render("confirmation.html", params);
 	}

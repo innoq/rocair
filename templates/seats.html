@@ -15,7 +15,9 @@
 
 <p class="lead-text">
 	We preselected the seat
-	<a data-receiver="seat" href="#seat-{{ selectedSeat.label() }}" >{{ selectedSeat.label() }}</a>
+	<span data-receiver="seat">
+		<a href="#seat-{{ selectedSeat.label() }}" >{{ selectedSeat.label() }}</a>
+	</span>
 	for you. Feel free to select another seat below.
 </p>
 
