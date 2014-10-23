@@ -26,8 +26,13 @@ a {
 }
 
 a:active,
-a:focus {
-	color: #BE5C5C;
+a:focus,
+a:hover {
+	color: white;
+	background-color: #EB6060;
+	transition: all 0.25s ease-in-out;
+	text-decoration: none;
+	outline: none;
 }
 
 p {
@@ -83,7 +88,7 @@ footer {
 
 .seperator {
 	padding-top: 1em;
-	border-top: 2px solid #eee;
+	border-top: 2px solid #ddd;
 	margin-top: 1.5em;
 }
 
@@ -91,15 +96,9 @@ footer {
 	margin-bottom: 1em;
 }
 
-
-/* Forms
-========================================================================== */
-
-input[type=radio][disabled],
-input[type=checkbox][disabled],
-.unavailable,
-.unavailable * { /* XXX: bad selector? */
-	cursor: not-allowed;
+.logo:hover,
+.logo:focus {
+	background-color: white;
 }
 
 
@@ -145,6 +144,7 @@ dt {
 	background-color: white;
 	border: 2px solid #EB6060;
 	border-radius: 2px;
+	outline: none;
 }
 
 a.button {
@@ -185,6 +185,16 @@ a.button {
 	margin-bottom: 1em;
 }
 
+/* Forms
+========================================================================== */
+
+input[type=radio][disabled],
+input[type=checkbox][disabled],
+.unavailable,
+.unavailable * {
+	cursor: not-allowed;
+}
+
 
 /* Checkin Form
 ========================================================================== */
@@ -204,6 +214,17 @@ a.button {
 	border: 2px solid #ddd;
 	-webkit-appearance: none;
 	border-radius: 2px;
+	transition: all 0.25s ease-in-out;
+	outline: none;
+	box-shadow: none;
+}
+
+.form-row input[type=text].invalid-input, .form-row input[type=text].invalid-input:focus {
+	border: 2px solid #EB6060;
+}
+
+.form-row input[type=text].valid-input {
+	border: 2px solid #ddd;
 }
 
 .form-row input[type=text]:focus {
@@ -221,7 +242,7 @@ a.button {
 .plane-body {
 	clear: both;
 	width: 16em;
-	margin: 0 auto;
+	margin: 0;
 	background-color: white;
 }
 
@@ -231,7 +252,7 @@ a.button {
 	overflow: hidden;
 }
 
-.plane-body:before, .plane-body:after {
+.generatedcontent .plane-body:before, .generatedcontent .plane-body:after {
 	content: "";
 	position: relative;
 	display: block;
@@ -242,13 +263,22 @@ a.button {
 	background-repeat: no-repeat;
 }
 
-.plane-body:before {
-	background-image: url(plane-head.svg);
+.svg .plane-body:before {
+	background-image: url(../images/plane-head.svg);
 }
 
-.plane-body:after {
-	background-image: url(plane-tail.svg);
+.svg .plane-body:after {
+	background-image: url(../images/plane-tail.svg);
 }
+
+.no-svg .plane-body:before {
+	background-image: url(../images/plane-head.png);
+}
+
+.no-svg .plane-body:after {
+	background-image: url(../images/plane-tail.png);
+}
+
 
 .rows,
 .seats {
@@ -287,13 +317,9 @@ a.button {
 
 /* augemented */
 
-.rows.augmented .unavailable {
-	opacity: 1; /* neutralizes basic version -- XXX: hacky */
-}
-
 .rows.augmented .seats > li {
 	margin-bottom: 1em; /* legroom */
-	background-image: url(seat_unoccupied.svg);
+	background-image: url(../images/seat_unoccupied.svg);
 	background-size: contain;
 	height: 0;
 	padding-bottom: 14.28%;
@@ -304,18 +330,18 @@ a.button {
 }
 
 .rows.augmented .seats > li.selected {
-	background-image: url(seat_selected.svg);
+	background-image: url(../images/seat_selected.svg);
 	background-size: contain;
 }
 
 .rows.augmented .seats > li.occupied {
-	background-image: url(seat_occupied.svg);
+	background-image: url(../images/seat_occupied.svg);
 	background-size: contain;
 }
 
 .rows.augmented .seats > li.vip { /* XXX: crude */
 	margin-bottom: 1.5em; /* extra legroom */
-	background-image: url(seat_vip.svg);
+	background-image: url(../images/seat_vip.svg);
 	background-size: contain;
 }
 
@@ -323,10 +349,23 @@ a.button {
 	margin-left: -999em;
 }
 
+
 /* Debug panel
 ========================================================================== */
 
 .debug-panel { text-align: center; }
+
+
+/* Tooltips
+========================================================================== */
+
+.tooltip {
+	font-weight: 600;
+	color: #EB6060;
+	font-size: 90%;
+	transition: all 0.25s ease-in-out;
+}
+
 
 /* Mobile first media queries
 ========================================================================== */
@@ -346,12 +385,6 @@ a.button {
 		display: inline;
 		line-height: 1em;
 		margin-right: 0.5em;
-	}
-
-	.plane {
-		background-image: url(plane-wings.svg);
-		background-position: 50% 50%;
-		background-repeat: no-repeat;
 	}
 
 	.plane-body {

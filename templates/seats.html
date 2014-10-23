@@ -58,9 +58,9 @@
 					<li>
 						<ul class="seats">
 							{% for seat in row %}
-							<li data-emitter="seat" {{ optAttr("class", seat.class()) }} {{
-									optAttr("title", seat.desc) }}>
-								<label title="{{ seat.label() }}">
+							<li title="{{ seat.label() }}" data-emitter="seat" class="{{seat.class()}} with-tooltip"
+								{{ optAttr("title", seat.desc) }}>
+								<label>
 									<input type="radio" name="seat" id="seat-{{ seat.id }}" value="{{ seat.id }}" {{
 											optAttr("disabled", seat.unavailable()) }} {{
 											optAttr("checked", seat.selected) }}>

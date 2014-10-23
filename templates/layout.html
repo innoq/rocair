@@ -4,17 +4,22 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>{{ title }}</title>
-	<link rel="stylesheet" href="/assets/normalize.css">
 	{% if includeCSS %}
-		<link rel="stylesheet" href="/assets/main.css">
+		<link rel="stylesheet" href="/assets/styles/normalize.css">
+		<link rel="stylesheet" href="/assets/styles/main.css">
+		<!-- TODO: Load Webfonts async -->
 		<link href='http://fonts.googleapis.com/css?family=Lato:700italic|Open+Sans:400,300,600' rel='stylesheet' type='text/css'>
+	{% endif %}
+	{% if includeJS %}
+		<script src="/assets/vendor/modernizr.js"></script>
 	{% endif %}
 </head>
 
 <body class="container">
 	<header class="company-header">
-		<a href="/"><img src="/assets/rocair-logo.svg" width="250px" alt="ROCA Airways Logo"></a>
+		<a class="logo" href="/"><img src="/assets/images/rocair-logo.svg" width="250px" alt="ROCA Airways Logo"></a>
 	</header>
 
 	<main role="main">
@@ -50,11 +55,15 @@
 	</footer>
 
 	{% if includeJS %}
+	<!-- TODO: Load stuff async via enhance.js -->
+	<!-- <script src="http://ajax.googleapis.com/ajax/libs/webfont/1.5.3/webfont.js"></script> -->
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.js"></script>
-	<script src="/assets/fancy_controls.js"></script>
-	<script src="/assets/data_mirror.js"></script>
-	<script src="/assets/smooth_scroll.js"></script>
-	<script src="/assets/main.js"></script>
+	<script src="/assets/scripts/fancy_controls.js"></script>
+	<script src="/assets/scripts/data_mirror.js"></script>
+	<script src="/assets/scripts/smooth_scroll.js"></script>
+	<script src="/assets/vendor/h5validate.js"></script>
+	<script src="/assets/vendor/tooltipsy.js"></script>
+	<script src="/assets/scripts/main.js"></script>
 	{% endif %}
 </body>
 
