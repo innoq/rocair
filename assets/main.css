@@ -8,7 +8,7 @@
 ========================================================================== */
 
 body {
-	margin: 2em;
+	margin: 1em;
 	font-family: 'Open Sans', sans-serif;
 	font-weight: 300;
 	color: #333;
@@ -38,7 +38,10 @@ p.lead-text {
 	font-size: 1.25em;
 }
 
-label, strong { font-weight: 400; }
+label, strong, dt {
+	color: #555;
+	font-weight: 600;
+}
 
 .annotation {
 	color: #AAA;
@@ -57,9 +60,10 @@ label, strong { font-weight: 400; }
 	color: #777;
 }
 
-.unavailable {
-	opacity: 0.5; /* TODO: not safe */
+/* .unavailable {
+	opacity: 0.5; TODO: not safe
 }
+ */
 
 .vis-alt { /* TODO: not accessible */
 	display: none;
@@ -72,11 +76,15 @@ label, strong { font-weight: 400; }
 footer {
 	clear: both;
 	display: block;
-	margin: 2em 0 6em;
-	border-top: 2px solid #eee;
-	padding-top: 1em;
 	font-size: 80%;
 	color: #777;
+	margin-bottom: 2em;
+}
+
+.seperator {
+	padding-top: 1em;
+	border-top: 2px solid #eee;
+	margin-top: 1.5em;
 }
 
 .company-header {
@@ -99,21 +107,30 @@ input[type=checkbox][disabled],
 ========================================================================== */
 
 .details {
-	margin-top: 2em;
+	margin: 2em auto;
+	overflow: hidden;
 }
 
 .full-width {
 	width: 100%;
-	overflow: hidden;
 }
 
 /* Definition List
 ========================================================================== */
 
-dd { margin: 0 0 0.5em 0; }
+dd, dt {
+	display: block;
+}
+
+dd {
+	margin: 0 0 0.5em 38%;
+	width: 62%;
+}
+
 dt {
-	font-weight: 600;
+	float: left;
 	margin-bottom: 0em;
+	width: 38%;
 }
 
 
@@ -127,6 +144,11 @@ dt {
 	color: #EB6060;
 	background-color: white;
 	border: 2px solid #EB6060;
+	border-radius: 2px;
+}
+
+a.button {
+	text-decoration: none;
 }
 
 .button:focus, .button:hover {
@@ -153,6 +175,15 @@ dt {
 	border: 2px solid #DDD;
 }
 
+.button-bar {
+	padding: 0.75em 0;
+	margin-top: 1em;
+	overflow: hidden;
+}
+
+.button-bar * + * {
+	margin-bottom: 1em;
+}
 
 
 /* Checkin Form
@@ -171,6 +202,8 @@ dt {
 .form-row input[type=text] {
 	padding: 0.5em 1em;
 	border: 2px solid #ddd;
+	-webkit-appearance: none;
+	border-radius: 2px;
 }
 
 .form-row input[type=text]:focus {
@@ -185,39 +218,35 @@ dt {
 /* Airplane
 ========================================================================== */
 
-.plane {
-	background-image: url(plane-wings.svg);
-	background-position: 50% 50%;
-	background-repeat: no-repeat;
-}
-
 .plane-body {
 	clear: both;
-	width: 400px;
-	margin: 2em auto;
+	width: 16em;
+	margin: 0 auto;
 	background-color: white;
 }
 
 .plane-cabin {
-	border-right: 2px solid #EB6060;
-	border-left: 2px solid #EB6060;
+	border-right: 1px solid #EB6060;
+	border-left: 1px solid #EB6060;
 	overflow: hidden;
 }
 
-.plane-body:before {
+.plane-body:before, .plane-body:after {
 	content: "";
 	position: relative;
 	display: block;
-	height: 350px;
-	width: 400px;
+	height: 0;
+	padding-bottom: 100%;
+	width: 100%;
+	background-size: contain;
+	background-repeat: no-repeat;
+}
+
+.plane-body:before {
 	background-image: url(plane-head.svg);
 }
 
 .plane-body:after {
-	content: "";
-	display: block;
-	height: 400px;
-	width: 400px;
 	background-image: url(plane-tail.svg);
 }
 
@@ -229,38 +258,32 @@ dt {
 }
 
 .rows {
-	padding: 0 20px;
+	padding: 0 1em;
 }
-
-.rows > li:first-child {
-	margin-top: 25px;
-}
-
 
 .seats {
-	overflow: visible; /* avoids clipping and scrolling on focus-scaled seat */
+	overflow: hidden; /* avoids clipping and scrolling on focus-scaled seat */
+	margin-top: 1em;
 }
+
 
 .seats > li {
 	float: left;
-	width: 50px;
-	height: 50px;
-	margin: 0;
-	pading: 0;
-	line-height: 50px;
+	width: 14.28%;
 	text-align: center;
-	transition: all 0.25s ease-in-out;
 }
 
 .seats > li:nth-child(6n+4) { /* aisle */
-	margin-left: 50px;
+	margin-left: 14.28%;
 }
 
 .seats label { /* fill container */
 	display: block;
-	width: 100%;
-	height: 100%;
+	width: 90%;
+	font-size: 80%;
+	text-align: center;
 }
+
 
 /* augemented */
 
@@ -271,6 +294,9 @@ dt {
 .rows.augmented .seats > li {
 	margin-bottom: 1em; /* legroom */
 	background-image: url(seat_unoccupied.svg);
+	background-size: contain;
+	height: 0;
+	padding-bottom: 14.28%;
 }
 
 .rows.augmented .seats > li:not(.unavailable) {
@@ -279,15 +305,18 @@ dt {
 
 .rows.augmented .seats > li.selected {
 	background-image: url(seat_selected.svg);
+	background-size: contain;
 }
 
 .rows.augmented .seats > li.occupied {
 	background-image: url(seat_occupied.svg);
+	background-size: contain;
 }
 
 .rows.augmented .seats > li.vip { /* XXX: crude */
-	margin-bottom: 40px; /* extra legroom */
+	margin-bottom: 1.5em; /* extra legroom */
 	background-image: url(seat_vip.svg);
+	background-size: contain;
 }
 
 .rows.augmented label {
@@ -297,34 +326,7 @@ dt {
 /* Debug panel
 ========================================================================== */
 
-.debug {
-	position: fixed;
-	bottom: 0em;
-	right: 0em;
-	left: 0em;
-	border-top: 2px solid #DDD;
-	padding: 0.75em 1em 1em 1em;
-	text-align: center;
-	background-color: white;
-	overflow: hidden;
-}
-
-.debug a {
-	font-size: 80%;
-	text-decoration: none;
-}
-
-.debug a, .debug .annotation {
-	margin-bottom: 1em;
-}
-
-.debug .annotation {
-	display: block;
-}
-
-.debug a:last-child {
-	margin-right: 0em;
-}
+.debug-panel { text-align: center; }
 
 /* Mobile first media queries
 ========================================================================== */
@@ -346,4 +348,19 @@ dt {
 		margin-right: 0.5em;
 	}
 
+	.plane {
+		background-image: url(plane-wings.svg);
+		background-position: 50% 50%;
+		background-repeat: no-repeat;
+	}
+
+	.plane-body {
+		width: 25em;
+	}
+
+	.plane-cabin {
+		border-width: 2px;
+	}
+
+	.debug-panel { text-align: left; }
 }

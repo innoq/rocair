@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html class="no-js">
 
 <head>
 	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>{{ title }}</title>
 	<link rel="stylesheet" href="/assets/normalize.css">
 	{% if includeCSS %}
@@ -20,16 +21,7 @@
 		{% block body %}{% endblock %}
 	</main>
 
-	{% if devLinks %}
-	<div class="debug">
-		<span class="annotation">You can toggle CSS and JS to see PE in action</span>
-		{% for link in devLinks %}
-		<a class="button secondary" href="{{ link.uri }}" title="{{ link.desc }}">{{ link.label }}</a>
-		{% endfor %}
-	</div>
-	{% endif %}
-
-	<footer>
+	<footer class="seperator">
 		<p>
 			<span class="organization">ROCA</span> <i>Airways</i> online check-in is a simple demo application
 			demonstrating the
@@ -39,10 +31,22 @@
 			</a>
 			for both end users and developers.
 		</p>
+
 		<p>
 			Created by <a href="https://www.innoq.com">innoQ</a>, though based
 			on the collective wisdom of web advocates across the globe.
 		</p>
+
+		{% if devLinks %}
+		<div class="debug-panel seperator">
+			<p><i>You can toggle styling and scripting below to see progressive enhancement in action.</i></p>
+			<div class="button-bar">
+			{% for link in devLinks %}
+				<a class="button secondary" href="{{ link.uri }}" title="{{ link.desc }}">{{ link.label }}</a>
+			{% endfor %}
+			</div>
+		</div>
+		{% endif %}
 	</footer>
 
 	{% if includeJS %}

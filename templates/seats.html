@@ -29,22 +29,7 @@
 	arrow keys.
 </p>
 
-<section class="details half-width">
-	<h2>Passenger Details</h2>
-
-	<dl id="passenger-details">
-		<dt>Name</dt>
-		<dd>{{ passengerName }}</dd>
-		<dt>Class</dt>
-		<dd>Economy</dd>
-		<dt>Seat</dt>
-		<dd>{{ selectedSeat.label() }}</dd>
-		<dt>Frequent Flyer Number</dt>
-		<dd></dd>
-	</dl>
-</section>
-
-<section class="details half-width">
+<section class="details">
 	<h2>Flight Details</h2>
 
 	<dl id="flight-details">
@@ -63,6 +48,7 @@
 
 <section class="details full-width">
 <form action="{{ checkInURI }}" method="post" class="plane">
+	<input type="hidden" name="passengerName" value="{{ passengerName }}">
 	<div class="plane-body">
 		<div class="plane-cabin">
 				<ul class="rows">
@@ -70,10 +56,10 @@
 					<li>
 						<ul class="seats">
 							{% for seat in row %}
-							<li {{ optAttr("class", seat.class()) }} {{
+							<li data-emitter="seat" {{ optAttr("class", seat.class()) }} {{
 									optAttr("title", seat.desc) }}>
 								<label title="{{ seat.label() }}">
-									<input type="radio" data-emitter="seat" name="seat" id="seat-{{ seat.id }}" value="{{ seat.id }}" {{
+									<input type="radio" name="seat" id="seat-{{ seat.id }}" value="{{ seat.id }}" {{
 											optAttr("disabled", seat.unavailable()) }} {{
 											optAttr("checked", seat.selected) }}>
 									{{ seat.label() }}
@@ -86,6 +72,19 @@
 				</ul>
 		</div>
 	</div>
+
+	<section class="details">
+		<h2>Passenger Details</h2>
+
+		<dl id="passenger-details">
+			<dt>Name</dt>
+			<dd>{{ passengerName }}</dd>
+			<dt>Class</dt>
+			<dd>Economy</dd>
+			<dt>Seat</dt>
+			<dd data-receiver="seat">{{ selectedSeat.label() }}</dd>
+		</dl>
+	</section>
 
 	<input class="button full-width" type="submit" value="Confirm check-in">
 </form>

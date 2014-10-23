@@ -8,13 +8,11 @@
 $.fn.dataMirror = function () {
 	this.each(function() {
 		var emitter = $(this);
-		console.log('Data mirroring enabled for: ' + emitter.attr('value'));
 		var receiverID = emitter.attr("data-emitter");
 		var receiversSelector = "[data-receiver=" + receiverID + "]";
 		var receivers = $(receiversSelector);
-		emitter.on('change', function(ev){
-			var value = $(this).attr('value');
-			console.log(value + ' changed: ' + ev);
+		emitter.on('click', function(ev){
+			var value = $(this).find('input').attr('value');
 			receivers.each(function(){
 				$(this).text(value);
 			});
