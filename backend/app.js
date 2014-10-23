@@ -19,13 +19,14 @@ app.use("/assets", express.static(path.join(__dirname, "..", "assets")));
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.get("/", function(req, res) {
-	// TODO: Make dev-links panel work
 	var flightID = "RC-" + util.randomInt(100, 9999);
 	var params = {
 		title: title,
-		includeCSS: '1',
+		includeCSS: req.query.css !== "0",
+		includeJS: req.query.js !== "0",
 		flight: flightID,
-		checkInURI: "/check-in/" + flightID
+		checkInURI: "/check-in/" + flightID,
+		devLinks: devLinks(req.url)
 	};
 	res.render("start.html", params);
 });
@@ -51,7 +52,7 @@ app.all("/check-in/:flight", function(req, res) {
 		flightID: flightID,
 		includeCSS: req.query.css !== "0",
 		includeJS: req.query.js !== "0",
-		devLinks: devLinks(req.path)
+		devLinks: devLinks(req.url)
 	};
 
 	if(req.method === "GET") {
@@ -62,7 +63,7 @@ app.all("/check-in/:flight", function(req, res) {
 		params.selectedSeat = seatGenerator.selectedSeat;
 		params.departure = oneWeekFromNow(1);
 		params.arrival = oneWeekFromNow(2);
-		params.passengerName = req.query.passengerName; // should be in the body
+		params.passengerName = req.query.passengerName;
 
 		res.render("seats.html", params);
 	} else {
@@ -94,7 +95,12 @@ function devLinks(uri) {
 		queryString: "css=0&js=0"
 	}];
 	links.forEach(function(link) {
-		link.uri = link.queryString ? [uri, link.queryString].join("?") : uri;
+		if (uri.indexOf("?") > -1) {
+			link.uri = link.queryString ? [uri, link.queryString].join("&") : uri;
+		} else {
+			link.uri = link.queryString ? [uri, link.queryString].join("?") : uri;
+		}
+
 		delete link.queryString;
 	});
 	return links;
