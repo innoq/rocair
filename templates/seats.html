@@ -13,14 +13,6 @@
 	flight <i>{{ flightID }}</i> is now available.
 </p>
 
-<p class="lead-text">
-	We preselected the seat
-	<span data-receiver="seat">
-		<a href="#seat-{{ selectedSeat.label() }}" >{{ selectedSeat.label() }}</a>
-	</span>
-	for you. Feel free to select another seat below.
-</p>
-
 <p class="vis-alt">
 	Rows are numbered from nose to tail. A and F are window, C and D aisle
 	seats. A-C are on the left, D-F on the right.
@@ -50,6 +42,14 @@
 
 <section class="details full-width">
 <form action="{{ checkInURI }}" method="post" class="plane">
+	<h2>Seat Selection</h2>
+	<p class="lead-text">
+		We preselected the seat
+		<span data-receiver="seat">
+			<a href="#seat-{{ selectedSeat.label() }}" >{{ selectedSeat.label() }}</a>
+		</span>
+		for you. Feel free to select another seat below.
+	</p>
 	<input type="hidden" name="passengerName" value="{{ passengerName }}">
 	<div class="plane-body">
 		<div class="plane-cabin">

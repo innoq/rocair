@@ -17,9 +17,11 @@
 		});
 	}
 
-	$('.checkin-form').h5Validate({
-		errorClass: 'invalid-input',
-		validClass: 'valid-input'
-	});
+	if (Modernizr.formvalidationapi) {
+		$('.checkin-form').h5Validate({
+			errorClass: 'invalid-input',
+			validClass: 'valid-input'
+		});
+	}
 
 }(jQuery));

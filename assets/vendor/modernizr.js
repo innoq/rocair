@@ -1,5 +1,5 @@
 /* Modernizr 2.8.3 (Custom Build) | MIT & BSD
- * Build: http://modernizr.com/download/#-fontface-generatedcontent-input-inputtypes-svg-touch-printshiv-cssclasses-teststyles-testprop-testallprops-prefixes-domprefixes
+ * Build: http://modernizr.com/download/#-fontface-backgroundsize-generatedcontent-input-inputtypes-svg-printshiv-cssclasses-teststyles-testprop-testallprops-domprefixes-forms_validation
  */
 ;
 
@@ -23,13 +23,7 @@ window.Modernizr = (function( window, document, undefined ) {
 
     smile = ':)',
 
-    toString = {}.toString,
-
-    prefixes = ' -webkit- -moz- -o- -ms- '.split(' '),
-
-
-
-    omPrefixes = 'Webkit Moz O ms',
+    toString = {}.toString,    omPrefixes = 'Webkit Moz O ms',
 
     cssomPrefixes = omPrefixes.split(' '),
 
@@ -197,18 +191,8 @@ window.Modernizr = (function( window, document, undefined ) {
           props = (prop + ' ' + (domPrefixes).join(ucProp + ' ') + ucProp).split(' ');
           return testDOMProps(props, prefixed, elem);
         }
-    }    tests['touch'] = function() {
-        var bool;
-
-        if(('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch) {
-          bool = true;
-        } else {
-          injectElementWithStyles(['@media (',prefixes.join('touch-enabled),('),mod,')','{#modernizr{top:9px;position:absolute}}'].join(''), function( node ) {
-            bool = node.offsetTop === 9;
-          });
-        }
-
-        return bool;
+    }    tests['backgroundsize'] = function() {
+        return testPropsAll('backgroundSize');
     };
     tests['fontface'] = function() {
         var bool;
@@ -329,7 +313,6 @@ window.Modernizr = (function( window, document, undefined ) {
 
     Modernizr._version      = version;
 
-    Modernizr._prefixes     = prefixes;
     Modernizr._domPrefixes  = domPrefixes;
     Modernizr._cssomPrefixes  = cssomPrefixes;
 
@@ -848,4 +831,66 @@ window.Modernizr = (function( window, document, undefined ) {
   shivPrint(document);
 
 }(this, document));
+// This implementation only tests support for interactive form validation.
+// To check validation for a specific type or a specific other constraint,
+// the test can be combined:
+//    - Modernizr.inputtypes.numer && Modernizr.formvalidation (browser supports rangeOverflow, typeMismatch etc. for type=number)
+//    - Modernizr.input.required && Modernizr.formvalidation (browser supports valueMissing)
+//
+(function(document, Modernizr){
+
+
+  Modernizr.formvalidationapi = false;
+  Modernizr.formvalidationmessage = false;
+
+  Modernizr.addTest('formvalidation', function() {
+    var form = document.createElement('form');
+    if ( !('checkValidity' in form) || !('addEventListener' in form) ) {
+      return false;
+    }
+    if ('reportValidity' in form) {
+      return true;
+    }
+    var invalidFired = false;
+    var input;
+
+    Modernizr.formvalidationapi =  true;
+
+    // Prevent form from being submitted
+    form.addEventListener('submit', function(e) {
+      //Opera does not validate form, if submit is prevented
+      if ( !window.opera ) {
+        e.preventDefault();
+      }
+      e.stopPropagation();
+    }, false);
+
+    // Calling form.submit() doesn't trigger interactive validation,
+    // use a submit button instead
+    //older opera browsers need a name attribute
+    form.innerHTML = '<input name="modTest" required><button></button>';
+
+    Modernizr.testStyles('#modernizr form{position:absolute;top:-99999em}', function( node ) {
+      node.appendChild(form);
+
+      input = form.getElementsByTagName('input')[0];
+
+      // Record whether "invalid" event is fired
+      input.addEventListener('invalid', function(e) {
+        invalidFired = true;
+        e.preventDefault();
+        e.stopPropagation();
+      }, false);
+
+      //Opera does not fully support the validationMessage property
+      Modernizr.formvalidationmessage = !!input.validationMessage;
+
+      // Submit form by clicking submit button
+      form.getElementsByTagName('button')[0].click();
+    });
+
+    return invalidFired;
+  });
+
+})(document, window.Modernizr);
 ;

@@ -96,9 +96,30 @@ footer {
 	margin-bottom: 1em;
 }
 
+.logo {
+	background-repeat: no-repeat;
+	text-indent: -9999px;
+	display: block;
+	width: 250px;
+	height: 50px;
+}
+
+.svg.backgroundsize .logo {
+	background-image: url("../images/rocair-logo.svg");
+	background-size: contain;
+}
+
+.no-svg .logo {
+	background-image: url("../images/rocair-logo.png");
+}
+
 .logo:hover,
 .logo:focus {
 	background-color: white;
+}
+
+.container {
+	max-width: 40em;
 }
 
 
@@ -242,7 +263,7 @@ input[type=checkbox][disabled],
 .plane-body {
 	clear: both;
 	width: 16em;
-	margin: 0;
+	margin: 1em 0 0 0;
 	background-color: white;
 }
 
@@ -252,13 +273,15 @@ input[type=checkbox][disabled],
 	overflow: hidden;
 }
 
-.generatedcontent .plane-body:before, .generatedcontent .plane-body:after {
+.generatedcontent.backgroundsize .plane-body:before,
+.generatedcontent.backgroundsize .plane-body:after {
 	content: "";
 	position: relative;
 	display: block;
 	height: 0;
 	padding-bottom: 100%;
 	width: 100%;
+	background-size: 50% 50%;
 	background-size: contain;
 	background-repeat: no-repeat;
 }
@@ -293,9 +316,8 @@ input[type=checkbox][disabled],
 
 .seats {
 	overflow: hidden; /* avoids clipping and scrolling on focus-scaled seat */
-	margin-top: 1em;
+	margin: 1em inherit;
 }
-
 
 .seats > li {
 	float: left;
@@ -329,20 +351,38 @@ input[type=checkbox][disabled],
 	cursor: pointer;
 }
 
-.rows.augmented .seats > li.selected {
+.svg .rows.augmented .seats > li {
+	background-image: url(../images/seat_unoccupied.svg);
+}
+
+.svg .rows.augmented .seats > li.selected {
 	background-image: url(../images/seat_selected.svg);
-	background-size: contain;
 }
 
-.rows.augmented .seats > li.occupied {
+.svg .rows.augmented .seats > li.occupied {
 	background-image: url(../images/seat_occupied.svg);
-	background-size: contain;
 }
 
-.rows.augmented .seats > li.vip { /* XXX: crude */
+.svg .rows.augmented .seats > li.vip { /* XXX: crude */
 	margin-bottom: 1.5em; /* extra legroom */
 	background-image: url(../images/seat_vip.svg);
-	background-size: contain;
+}
+
+.no-svg .rows.augmented .seats > li {
+	background-image: url(../images/seat_unoccupied.png);
+}
+
+.no-svg .rows.augmented .seats > li.selected {
+	background-image: url(../images/seat_selected.png);
+}
+
+.no-svg .rows.augmented .seats > li.occupied {
+	background-image: url(../images/seat_occupied.png);
+}
+
+.no-svg .rows.augmented .seats > li.vip { /* XXX: crude */
+	margin-bottom: 1.5em; /* extra legroom */
+	background-image: url(../images/seat_vip.png);
 }
 
 .rows.augmented label {
