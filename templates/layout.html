@@ -9,8 +9,6 @@
 	{% if includeCSS %}
 		<link rel="stylesheet" href="/assets/styles/normalize.css">
 		<link rel="stylesheet" href="/assets/styles/main.css">
-		<!-- TODO: Load Webfonts async -->
-		<link href='http://fonts.googleapis.com/css?family=Lato:700italic|Open+Sans:400,300,600' rel='stylesheet' type='text/css'>
 	{% endif %}
 	{% if includeJS %}
 		<script src="/assets/vendor/modernizr.js"></script>
@@ -38,6 +36,12 @@
 		</p>
 
 		<p>
+			Sources of this application can be found at <a href="https://github.com/innoq/rocair">github</a>.
+			Feature and pull-requests are welcome, see the
+			<a href="https://github.com/innoq/rocair/issues">issue tracker</a> for further details.
+		</p>
+
+		<p>
 			Created by <a href="https://www.innoq.com">innoQ</a>, though based
 			on the collective wisdom of web advocates across the globe.
 		</p>
@@ -55,16 +59,15 @@
 	</footer>
 
 	{% if includeJS %}
-	<!-- TODO: Load stuff async via enhance.js -->
-	<!-- <script src="http://ajax.googleapis.com/ajax/libs/webfont/1.5.3/webfont.js"></script> -->
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.js"></script>
-	<script src="/assets/scripts/fancy_controls.js"></script>
-	<script src="/assets/scripts/data_mirror.js"></script>
-	<script src="/assets/scripts/smooth_scroll.js"></script>
-	<script src="/assets/vendor/h5validate.js"></script>
-	<script src="/assets/vendor/tooltipsy.js"></script>
-	<script src="/assets/scripts/main.js"></script>
+		<script>
+			// Cutting the mustard, test support for jquery
+			if (typeof JSON !== 'undefined' && 'querySelector' in document && 'addEventListener' in window) {
+				document.write('<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.js"><\/script>');
+				document.write('<script src="/assets/scripts/main.js"><\/script>');
+			}
+		</script>
 	{% endif %}
+
 </body>
 
 </html>

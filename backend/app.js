@@ -8,27 +8,46 @@ var path = require("path");
 var generateSeats = require("./seats");
 var util = require("./util");
 
-var title = "ROCA Airways Web Check-In";
+var startTitle = "ROCA Airways Web Check-In | Start";
+var seatTitle = "ROCA Airways Web Check-In | Seat Selection";
+var finishTitle = "ROCA Airways Web Check-In | Finished";
 
 var app = express();
 var app = module.exports = express();
-app.set("title", title);
+
+app.set("startTitle", startTitle);
+app.set("seatTitle", seatTitle);
+app.set("finishTitle", finishTitle);
+
 nunjucks.configure("templates", { autoescape: true, express: app });
 
 app.use("/assets", express.static(path.join(__dirname, "..", "assets")));
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.get("/", function(req, res) {
-	var flightID = "RC-" + util.randomInt(100, 9999);
 	var params = {
-		title: title,
+		title: app.get("startTitle"),
 		includeCSS: req.query.css !== "0",
 		includeJS: req.query.js !== "0",
-		flight: flightID,
-		checkInURI: "/check-in/" + flightID,
+		checkInURI: "/",
 		devLinks: devLinks(req.url)
 	};
 	res.render("start.html", params);
+});
+
+app.post("/", function(req, res) {
+	var flightID = req.body.flight;
+	var passengerName = req.body.passengerName;
+
+	// someone's being clever or client validation did not work
+	if(flightID.indexOf("RC-") !== 0) {
+		res.status(404).send("We're afraid flight " + flightID +
+				" is not operated by ROCAir.");
+		return;
+	} else {
+		var checkInURI = "/check-in/" + flightID + "?passengerName=" +  encodeURIComponent(passengerName);
+		res.redirect(checkInURI);
+	}
 });
 
 app.all("/check-in/:flight", function(req, res) {
@@ -48,7 +67,7 @@ app.all("/check-in/:flight", function(req, res) {
 	}
 
 	var params = {
-		title: app.get("title"),
+		title: app.get("seatTitle"),
 		flightID: flightID
 	};
 
@@ -67,6 +86,7 @@ app.all("/check-in/:flight", function(req, res) {
 
 		res.render("seats.html", params);
 	} else {
+		params.title = app.get("finishTitle");
 		params.includeCSS = true;
 		params.includeJS = true;
 		params.selectedSeat = req.body.seat;

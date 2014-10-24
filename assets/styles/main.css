@@ -104,13 +104,13 @@ footer {
 	height: 50px;
 }
 
+.logo {
+	background-image: url("../images/rocair-logo.png");
+}
+
 .svg.backgroundsize .logo {
 	background-image: url("../images/rocair-logo.svg");
 	background-size: contain;
-}
-
-.no-svg .logo {
-	background-image: url("../images/rocair-logo.png");
 }
 
 .logo:hover,

@@ -4,7 +4,7 @@
 
 <h1>Online check-in</h1>
 <p class="lead-text">Welcome to ROCA Airways. You can check in online up to 72 hours before departure!</p>
-<form class="checkin-form" action="{{ checkInURI }}" method="get">
+<form class="checkin-form" action="{{ checkInURI }}" method="post">
 	<div class="form-row">
 		<label for="flight">Flight number <span class="annotation">(required)</span></label>
 		<input type="text" required="true" pattern="RC-[0-9]{4}" placeholder="e.g. RC-1234" name="flight" value="" />
