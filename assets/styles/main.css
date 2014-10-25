@@ -216,10 +216,13 @@ input[type=checkbox][disabled],
 	cursor: not-allowed;
 }
 
-.error-message {
-	color: #EB6060;
+.error-message{
 	font-size: 80%;
 	display: none;
+}
+
+.error-message, .error-message > * {
+	color: #EB6060;
 }
 
 .invalid-input + .error-message {

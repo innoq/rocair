@@ -1,5 +1,5 @@
 /* Modernizr 2.8.3 (Custom Build) | MIT & BSD
- * Build: http://modernizr.com/download/#-fontface-backgroundsize-generatedcontent-input-inputtypes-svg-printshiv-cssclasses-teststyles-testprop-testallprops-domprefixes-forms_validation-load
+ * Build: http://modernizr.com/download/#-fontface-backgroundsize-generatedcontent-input-inputtypes-svg-touch-printshiv-cssclasses-teststyles-testprop-testallprops-prefixes-domprefixes-forms_validation-load
  */
 ;
 
@@ -23,7 +23,13 @@ window.Modernizr = (function( window, document, undefined ) {
 
     smile = ':)',
 
-    toString = {}.toString,    omPrefixes = 'Webkit Moz O ms',
+    toString = {}.toString,
+
+    prefixes = ' -webkit- -moz- -o- -ms- '.split(' '),
+
+
+
+    omPrefixes = 'Webkit Moz O ms',
 
     cssomPrefixes = omPrefixes.split(' '),
 
@@ -191,7 +197,20 @@ window.Modernizr = (function( window, document, undefined ) {
           props = (prop + ' ' + (domPrefixes).join(ucProp + ' ') + ucProp).split(' ');
           return testDOMProps(props, prefixed, elem);
         }
-    }    tests['backgroundsize'] = function() {
+    }    tests['touch'] = function() {
+        var bool;
+
+        if(('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch) {
+          bool = true;
+        } else {
+          injectElementWithStyles(['@media (',prefixes.join('touch-enabled),('),mod,')','{#modernizr{top:9px;position:absolute}}'].join(''), function( node ) {
+            bool = node.offsetTop === 9;
+          });
+        }
+
+        return bool;
+    };
+    tests['backgroundsize'] = function() {
         return testPropsAll('backgroundSize');
     };
     tests['fontface'] = function() {
@@ -313,6 +332,7 @@ window.Modernizr = (function( window, document, undefined ) {
 
     Modernizr._version      = version;
 
+    Modernizr._prefixes     = prefixes;
     Modernizr._domPrefixes  = domPrefixes;
     Modernizr._cssomPrefixes  = cssomPrefixes;
 
