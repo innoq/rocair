@@ -43,7 +43,13 @@
 				if (isStartPage()) {
 					$('.checkin-form').h5Validate({
 						errorClass: 'invalid-input',
-						validClass: 'valid-input'
+						validClass: 'valid-input',
+						invalidCallback: function(elem, valid) {
+							$(elem.element).attr('aria-invalid', true);
+						},
+						validCallback: function(elem, valid) {
+							$(elem.element).removeAttr('aria-invalid');
+						}
 					});
 				}
 			}
@@ -52,7 +58,9 @@
 		{
 			// These enhancements should be fine with just jQuery in place
 			test : window.jQuery && isSeatSelectionPage(),
-			yep  : ["/assets/scripts/fancy_controls.js", "/assets/scripts/data_mirror.js", "/assets/scripts/smooth_scroll.js"],
+			yep  : ["/assets/scripts/fancy_controls.js",
+					"/assets/scripts/data_mirror.js",
+					"/assets/scripts/smooth_scroll.js"],
 			complete : function () {
 				if (isSeatSelectionPage()) {
 					$(".rows").fancyControls();

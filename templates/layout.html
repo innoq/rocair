@@ -17,12 +17,15 @@
 
 <body class="container">
 	<header role="banner" class="company-header">
-		<a class="logo" href="/">ROCA Airways Homepage</a>
+		<img class="fallback" src="/assets/images/rocair-logo.png" alt="ROCA Airways Logo">
+		<div><a class="logo" href="/">ROCA Airways Homepage</a></div>
 	</header>
 
 	<main role="main">
 		{% block body %}{% endblock %}
 	</main>
+
+	<hr class="fallback">
 
 	<footer role="contentinfo" class="seperator">
 		<p>
@@ -47,6 +50,7 @@
 		</p>
 
 		{% if devLinks %}
+		<hr class="fallback">
 		<div class="debug-panel seperator">
 			<p><i>You can toggle styling and scripting below to see progressive enhancement in action.</i></p>
 			<div class="button-bar">

@@ -65,13 +65,13 @@ label, strong, dt {
 	color: #777;
 }
 
-/* .unavailable {
-	opacity: 0.5; TODO: not safe
-}
- */
-
-.vis-alt { /* TODO: not accessible */
+/* fallbacks are only shown in HTML */
+.fallback {
 	display: none;
+}
+
+.vis-alt {
+	text-indent: 9999px;
 }
 
 
@@ -214,6 +214,16 @@ input[type=checkbox][disabled],
 .unavailable,
 .unavailable * {
 	cursor: not-allowed;
+}
+
+.error-message {
+	color: #EB6060;
+	font-size: 80%;
+	display: none;
+}
+
+.invalid-input + .error-message {
+	display: block;
 }
 
 

@@ -41,9 +41,14 @@ app.post("/", function(req, res) {
 
 	// someone's being clever or client validation did not work
 	if(flightID.indexOf("RC-") !== 0) {
-		res.status(404).send("We're afraid flight " + flightID +
-				" is not operated by ROCAir.");
-		return;
+		var params = {
+			title: 'Something went wrong',
+			errorMessage: "We're afraid flight " + flightID + " is not operated by ROCA Airways",
+			includeCSS: true,
+			includeJS: true
+		}
+		res.status(404);
+		res.render("error.html", params);
 	} else {
 		var checkInURI = "/check-in/" + flightID + "?passengerName=" +  encodeURIComponent(passengerName);
 		res.redirect(checkInURI);
@@ -54,16 +59,22 @@ app.all("/check-in/:flight", function(req, res) {
 	// validate request method -- XXX: we shouldn't be doing this manually
 	var methods = ["GET", "POST"]; // TODO: OPTIONS, HEAD?
 	if(methods.indexOf(req.method) === -1) {
-		res.set("Allow", methods.join(", "));
-		res.status(405).end();
-		return;
+		var params = {
+			title: 'Someting went wrong',
+			errorMessage: "You're action is not allowed here."
+		}
+		res.status(405);
+		res.render("error.html", params);
 	}
 
 	var flightID = req.params.flight.toUpperCase();
 	if(flightID.indexOf("RC-") !== 0) { // someone's being clever
-		res.status(404).send("We're afraid flight " + flightID +
-				" is not operated by ROCAir.");
-		return;
+		var params = {
+			title: 'Something went wrong',
+			errorMessage: "We're afraid flight " + flightID + " is not operated by ROCA Airways"
+		}
+		res.status(404)
+		res.render("error.html", params);
 	}
 
 	var params = {
