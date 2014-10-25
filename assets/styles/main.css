@@ -302,7 +302,6 @@ input[type=checkbox][disabled],
 	background-image: url(../images/plane-tail.png);
 }
 
-
 .rows,
 .seats {
 	margin: 0;
@@ -315,23 +314,30 @@ input[type=checkbox][disabled],
 }
 
 .seats {
-	overflow: hidden; /* avoids clipping and scrolling on focus-scaled seat */
+	/* avoids clipping and scrolling on focus-scaled seat */
+	overflow: hidden;
 	margin: 1em inherit;
 }
 
 .seats > li {
 	float: left;
-	width: 14.28%;
+	width: 16.6%;
 	text-align: center;
+	margin-bottom: 1em;
 }
 
-.seats > li:nth-child(6n+4) { /* aisle */
+/* If the browser supports nth-child an aisle is added */
+.seats > li:nth-child(n) {
+	width: 14.28%;
+}
+
+.seats > li:nth-child(6n+4) {
 	margin-left: 14.28%;
 }
 
-.seats label { /* fill container */
+.seats label, .seats input {
 	display: block;
-	width: 90%;
+	width: 100%;
 	font-size: 80%;
 	text-align: center;
 }
@@ -340,8 +346,6 @@ input[type=checkbox][disabled],
 /* augemented */
 
 .rows.augmented .seats > li {
-	margin-bottom: 1em; /* legroom */
-	background-image: url(../images/seat_unoccupied.svg);
 	background-size: contain;
 	height: 0;
 	padding-bottom: 14.28%;
@@ -404,6 +408,7 @@ input[type=checkbox][disabled],
 	color: #EB6060;
 	font-size: 90%;
 	transition: all 0.25s ease-in-out;
+	background-color: white;
 }
 
 

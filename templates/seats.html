@@ -6,6 +6,7 @@
 %}{% endmacro %}
 
 {% block body %}
+
 <h1>Online check-in</h1>
 
 <p class="lead-text">
@@ -18,14 +19,13 @@
 	seats. A-C are on the left, D-F on the right.
 </p>
 
-<p class="hint">
+<p class="annotation">
 	Note that most browsers allow navigating the selection via the tab and
 	arrow keys.
 </p>
 
 <section class="details">
 	<h2>Flight Details</h2>
-
 	<dl id="flight-details">
 		<dt>Flight</dt>
 		<dd>{{ flightID }}</dd>
@@ -40,44 +40,46 @@
 	</dl>
 </section>
 
-<section class="details full-width">
+
 <form action="{{ checkInURI }}" method="post" class="plane">
-	<h2>Seat Selection</h2>
-	<p class="lead-text">
-		We preselected the seat
-		<span data-receiver="seat">
-			<a href="#seat-{{ selectedSeat.label() }}" >{{ selectedSeat.label() }}</a>
-		</span>
-		for you. Feel free to select another seat below.
-	</p>
+	<section class="details">
+		<h2>Seat Selection</h2>
+		<p class="lead-text">
+			We preselected the seat
+			<span data-receiver="seat">
+				<a href="#seat-{{ selectedSeat.label() }}" >{{ selectedSeat.label() }}</a>
+			</span>
+			for you. Feel free to select another seat below.
+		</p>
+	</section>
+
 	<input type="hidden" name="passengerName" value="{{ passengerName }}">
 	<div class="plane-body">
 		<div class="plane-cabin">
-				<ul class="rows">
-					{% for row in seats %}
+			<ul class="rows">
+				{% for row in seats %}
 					<li>
 						<ul class="seats">
 							{% for seat in row %}
-							<li title="{{ seat.label() }}" data-emitter="seat" class="{{seat.class()}} with-tooltip"
-								{{ optAttr("title", seat.desc) }}>
-								<label>
-									<input type="radio" name="seat" id="seat-{{ seat.id }}" value="{{ seat.id }}" {{
+								<li title="{{ seat.label() + ' (' + seat.desc + ')' }}"
+									data-emitter="seat" class="{{seat.class()}} with-tooltip">
+									<label>
+										<input type="radio" name="seat" id="seat-{{ seat.id }}" value="{{ seat.id }}" {{
 											optAttr("disabled", seat.unavailable()) }} {{
 											optAttr("checked", seat.selected) }}>
-									{{ seat.label() }}
-								</label>
-							</li>
+										{{ seat.label() }}
+									</label>
+								</li>
 							{% endfor %}
 						</ul>
 					</li>
-					{% endfor %}
-				</ul>
+				{% endfor %}
+			</ul>
 		</div>
 	</div>
 
 	<section class="details">
 		<h2>Passenger Details</h2>
-
 		<dl id="passenger-details">
 			<dt>Name</dt>
 			<dd>{{ passengerName }}</dd>
@@ -90,5 +92,5 @@
 
 	<input class="button full-width" type="submit" value="Confirm check-in">
 </form>
-</section>
+
 {% endblock %}

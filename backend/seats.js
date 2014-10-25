@@ -38,7 +38,7 @@ function generateSeat(index, vipCount, occupancy) {
 		desc = "Business Class";
 	} else {
 		occupied = Math.random() < occupancy;
-		desc = occupied ? "Occupied" : null;
+		desc = occupied ? "Occupied" : "Free";
 	}
 	return new Seat(index, desc, vip, occupied);
 }
