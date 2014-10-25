@@ -35,15 +35,12 @@
 	</dl>
 </section>
 
-
 <form action="{{ checkInURI }}" method="post" class="plane">
 	<section class="details">
 		<h2>Seat Selection</h2>
 		<p class="lead-text">
 			We preselected the seat
-			<span data-receiver="seat">
-				<a href="#seat-{{ selectedSeat.label() }}" >{{ selectedSeat.label() }}</a>
-			</span>
+			<a href="#seat-{{ selectedSeat.label() }}" >{{ selectedSeat.label() }}</a>
 			for you. Feel free to select another seat below.
 		</p>
 		<p class="vis-alt">
