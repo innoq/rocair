@@ -16,9 +16,11 @@
 </head>
 
 <body class="container">
+
 	<header role="banner" class="company-header">
-		<img class="fallback" src="/assets/images/rocair-logo.png" alt="ROCA Airways Logo">
-		<div><a class="logo" href="/">ROCA Airways Homepage</a></div>
+		<a class="logo" href="/">
+			<img src="/assets/images/rocair-logo.png" alt="ROCA Airways Logo" width="250px" height="50px">
+		</a>
 	</header>
 
 	<main role="main">
@@ -63,13 +65,23 @@
 	</footer>
 
 	{% if includeJS %}
+
 		<script>
-			// Cutting the mustard, test support for jquery
-			if (typeof JSON !== 'undefined' && 'querySelector' in document && 'addEventListener' in window) {
+			// This is a simple demo app that uses jQuery. For the sake of simplicity,
+			// we omit loading all sorts of fallbacks for jQuery. It's all or nothing!
+
+			// "Cutting the mustard": Test support for jQuery and load it synchronously
+			if (typeof JSON !== 'undefined' && 'querySelector' in document
+				&& 'addEventListener' in window) {
+
 				document.write('<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.js"><\/script>');
+				// Locally served jQuery could be inserted here.
 				document.write('<script src="/assets/scripts/main.js"><\/script>');
+			} else {
+				// jQuery 1.x could be loaded here.
 			}
 		</script>
+
 	{% endif %}
 
 </body>
