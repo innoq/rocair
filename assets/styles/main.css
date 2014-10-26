@@ -72,6 +72,7 @@ label, strong, dt {
 
 .vis-alt {
 	text-indent: -9999px;
+	height: 0;
 }
 
 
@@ -94,23 +95,6 @@ footer {
 
 .company-header {
 	margin-bottom: 1em;
-}
-
-.logo {
-	background-repeat: no-repeat;
-	text-indent: -9999px;
-	display: block;
-	width: 250px;
-	height: 50px;
-}
-
-.logo {
-	background-image: url("../images/rocair-logo.png");
-}
-
-.svg.backgroundsize .logo {
-	background-image: url("../images/rocair-logo.svg");
-	background-size: contain;
 }
 
 .logo:hover,
@@ -276,7 +260,7 @@ input[type=checkbox][disabled],
 .plane-body {
 	clear: both;
 	width: 16em;
-	margin: 1em 0 0 0;
+	margin: 0 auto;
 	background-color: white;
 }
 
@@ -351,8 +335,8 @@ input[type=checkbox][disabled],
 .seats label, .seats input {
 	display: block;
 	width: 100%;
-	font-size: 80%;
-	text-align: center;
+	font-size: 90%;
+	text-align: left;
 }
 
 
@@ -368,38 +352,38 @@ input[type=checkbox][disabled],
 	cursor: pointer;
 }
 
-.svg .rows.augmented .seats > li {
-	background-image: url(../images/seat_unoccupied.svg);
-}
-
-.svg .rows.augmented .seats > li.selected {
-	background-image: url(../images/seat_selected.svg);
-}
-
-.svg .rows.augmented .seats > li.occupied {
-	background-image: url(../images/seat_occupied.svg);
-}
-
-.svg .rows.augmented .seats > li.vip { /* XXX: crude */
-	margin-bottom: 1.5em; /* extra legroom */
-	background-image: url(../images/seat_vip.svg);
-}
-
-.no-svg .rows.augmented .seats > li {
+.augmented .seats > li {
 	background-image: url(../images/seat_unoccupied.png);
 }
 
-.no-svg .rows.augmented .seats > li.selected {
+.augmented .seats > li.selected {
 	background-image: url(../images/seat_selected.png);
 }
 
-.no-svg .rows.augmented .seats > li.occupied {
+.augmented .seats > li.occupied {
 	background-image: url(../images/seat_occupied.png);
 }
 
-.no-svg .rows.augmented .seats > li.vip { /* XXX: crude */
-	margin-bottom: 1.5em; /* extra legroom */
+.augmented .seats > li.vip {
+	/* extra legroom */
+	margin-bottom: 1.5em;
 	background-image: url(../images/seat_vip.png);
+}
+
+.svg .augmented .seats > li {
+	background-image: url(../images/seat_unoccupied.svg);
+}
+
+.svg .augmented .seats > li.selected {
+	background-image: url(../images/seat_selected.svg);
+}
+
+.svg .augmented .seats > li.occupied {
+	background-image: url(../images/seat_occupied.svg);
+}
+
+.svg .augmented .seats > li.vip {
+	background-image: url(../images/seat_vip.svg);
 }
 
 .rows.augmented label {
