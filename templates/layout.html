@@ -19,7 +19,7 @@
 
 	<header role="banner" class="company-header">
 		<a class="logo" href="/">
-			<img src="/assets/images/rocair-logo.png" alt="ROCA Airways Logo" width="250px" height="50px">
+			<img src="/assets/images/rocair-logo-3x.png" alt="ROCA Airways Logo" width="250px" height="50px">
 		</a>
 	</header>
 
@@ -37,12 +37,8 @@
 			<a href="https://www.gov.uk/service-manual/making-software/progressive-enhancement">
 				progressive enhancement
 			</a>
-			for both end users and developers.
-		</p>
-
-		<p>
-			Sources of this application can be found at <a href="https://github.com/innoq/rocair">github</a>.
-			Feature and pull-requests are welcome, see the
+			for both end users and developers. Sources of this application can be found at
+			<a href="https://github.com/innoq/rocair">github</a>. Feature and pull-requests are welcome, see the
 			<a href="https://github.com/innoq/rocair/issues">issue tracker</a> for further details.
 		</p>
 
@@ -65,23 +61,7 @@
 	</footer>
 
 	{% if includeJS %}
-
-		<script>
-			// This is a simple demo app that uses jQuery. For the sake of simplicity,
-			// we omit loading all sorts of fallbacks for jQuery. It's all or nothing!
-
-			// "Cutting the mustard": Test support for jQuery and load it synchronously
-			if (typeof JSON !== 'undefined' && 'querySelector' in document
-				&& 'addEventListener' in window) {
-
-				document.write('<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.js"><\/script>');
-				// Locally served jQuery could be inserted here.
-				document.write('<script src="/assets/scripts/main.js"><\/script>');
-			} else {
-				// jQuery 1.x could be loaded here.
-			}
-		</script>
-
+    	<script src="/assets/scripts/main.js"></script>
 	{% endif %}
 
 </body>

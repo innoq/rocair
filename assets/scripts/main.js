@@ -1,12 +1,11 @@
 /*jslint vars: true, white: true */
-/*global jQuery */
 
-(function($) {
+(function(window, undefined) {
 
 	"use strict";
 
 	// Find out on which page to load what. We do not want to serve
-	// unused enhancements to all pages. Not very elegant, I know...
+	// unused enhancements to all pages. Not very elegant, but works...
 
 	function isStartPage() {
 		return document.title.indexOf("Start") > -1;
@@ -17,12 +16,38 @@
 	};
 
 
-	// We use feature-detection provided by Moderizr to load in
-	// additional enhancements async. For the sake of
+	// Cutting the mustard: most enhancements reuquire jQuery in place.
+	// If a browser does not support it (like IE8) we fall back to
+	// basic functionality. If it does support jQuery 2.x we load
+	// it first synchronously and provide a fallback in case
+	// the CDN is down.
+
+	if (typeof JSON !== 'undefined' && 'querySelector' in document
+					&& 'addEventListener' in window) {
+
+		Modernizr.load([
+			{
+				load: "//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.js",
+				complete: function () {
+					if ( !window.jQuery ) {
+						Modernizr.load('assets/vendor/jquery.js');
+					}
+				}
+			}
+		]);
+	} else {
+		// A fallback like jQuery 1.x could be loaded here.
+		return;
+	}
+
+	// We use feature-detection and script loading provided by Moderizr
+	// to test and load in additional enhancements. For the sake of
 	// simpilcity all enhancements are loaded individually.
 
 	Modernizr.load([
 
+		// Webfonts are loaded by Webfontloader. You can find more details
+		// about it here: TODO
 		{
 			test : Modernizr.fontface,
 			yep  : '//ajax.googleapis.com/ajax/libs/webfont/1.5.3/webfont.js',
@@ -35,8 +60,10 @@
 			}
 		},
 
+		// Clientside form validation is provided by the jQuery plugin h5validate.
+		// It works unobtrusively and adds ARIA attributes in its callbacks.
 		{
-			test : Modernizr.formvalidationapi && isStartPage(),
+			test : Modernizr.formvalidationapi && window.jQuery && isStartPage(),
 			yep  : "/assets/vendor/h5validate.js",
 			callback : function() {
 				$('.checkin-form').h5Validate({
@@ -52,28 +79,33 @@
 			}
 		},
 
-
+		// These small enhancements should be fine with just jQuery in place
 		{
-			// These enhancements should be fine with just jQuery in place
-			test : isSeatSelectionPage(),
-			yep  : ["/assets/scripts/fancy_controls.js",
+			test : window.jQuery && isSeatSelectionPage(),
+			yep  : ["/assets/scripts/seat_picker.js",
 					"/assets/scripts/data_mirror.js",
-					"/assets/scripts/smooth_scroll.js"],
+					"/assets/scripts/smooth_scroll.js",
+					"/assets/scripts/collapsable.js"],
 			callback : {
-				"fancy_controls.js": function () {
-					$(".rows").fancyControls();
+				"seat_selector.js": function () {
+					$(".rows").seatPicker();
 				},
 				"data_mirror.js": function () {
 					$("[data-emitter]").dataMirror();
+				},
+				"collapsable.js": function () {
+					// TODO
 				}
 			}
 		},
 
+		// Fancy tooltips are only shown on non-touch devices as the tend to
+		// stay open on touch events and provide a weird glitch while scrolling.
 		{
-			test : !Modernizr.touch && isSeatSelectionPage(),
+			test : !Modernizr.touch && window.jQuery && isSeatSelectionPage(),
 			yep  : "/assets/vendor/tooltipsy.js",
 			callback : function () {
-				$('.with-tooltip').tooltipsy({
+				$('[data-toggle=tooltip]').tooltipsy({
 					className: 'tooltip'
 				});
 			}
@@ -81,4 +113,4 @@
 
 	]);
 
-}(jQuery));
+}(this));

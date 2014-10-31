@@ -27,10 +27,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.get("/", function(req, res) {
 	var params = {
 		title: app.get("startTitle"),
-		includeCSS: req.query.css !== "0",
-		includeJS: req.query.js !== "0",
-		checkInURI: "/",
-		devLinks: devLinks(req.url)
+		includeCSS: true,
+		includeJS: true,
+		checkInURI: "/"
 	};
 	res.render("start.html", params);
 });
@@ -91,9 +90,9 @@ app.all("/check-in/:flight", function(req, res) {
 		params.departure = oneWeekFromNow(1);
 		params.arrival = oneWeekFromNow(2);
 		params.passengerName = req.query.passengerName;
-		params.includeCSS = req.query.css !== "0";
-		params.includeJS = req.query.js !== "0";
-		params.devLinks = devLinks(req.url);
+		params.includeCSS = true;
+		params.includeJS = true;
+		//params.devLinks = devLinks(req.url);
 
 		res.render("seats.html", params);
 	} else {

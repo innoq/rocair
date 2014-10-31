@@ -41,7 +41,8 @@
 		<p class="lead-text">
 			We preselected the seat
 			<a href="#seat-{{ selectedSeat.label() }}" >{{ selectedSeat.label() }}</a>
-			for you. Feel free to select another seat below.
+			for you. Feel free to select another seat below or <a href="#passenger-details">skip ahead</a>
+			to finish the check-in.
 		</p>
 		<p class="vis-alt">
 			Rows are numbered from nose to tail. A and F are window, C and D aisle
@@ -50,15 +51,14 @@
 	</section>
 
 	<input type="hidden" name="passengerName" value="{{ passengerName }}">
-	<div class="plane-body">
+	<div data-toggle="collapsable" class="plane-body">
 		<div class="plane-cabin">
 			<ul class="rows">
 				{% for row in seats %}
 					<li>
 						<ul class="seats">
 							{% for seat in row %}
-								<li title="{{ seat.label() + ' (' + seat.desc + ')' }}"
-									data-emitter="seat" class="{{seat.class()}} with-tooltip">
+								<li title="{{ seat.label() + ' (' + seat.desc + ')' }}" class="seat {{seat.class()}} with-tooltip">
 									<label>
 										<input type="radio" name="seat" id="seat-{{ seat.id }}" value="{{ seat.id }}" {{
 											optAttr("disabled", seat.unavailable()) }} {{
