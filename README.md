@@ -13,6 +13,8 @@ implementing such functionality ourselves (usually in sub-par fashion)
 created by [innoQ](https://www.innoq.com), though based on the collective
 wisdom of web advocates across the globe
 
+note that there is a more elaborate version at https://github.com/innoq/roca-airways
+
 
 Getting Started
 ---------------
